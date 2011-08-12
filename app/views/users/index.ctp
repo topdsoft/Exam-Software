@@ -4,7 +4,6 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('role');?></th>
-			<th><?php echo $this->Paginator->sort('group');?></th>
 			<th><?php echo $this->Paginator->sort('fName');?></th>
 			<th><?php echo $this->Paginator->sort('lName');?></th>
 			<th><?php echo $this->Paginator->sort('username');?></th>
@@ -21,7 +20,6 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $user['User']['id']; ?>&nbsp;</td>
 		<td><?php if($user['User']['role']==1) echo 'Student'; else echo'Instructor'; ?>&nbsp;</td>
-		<td><?php echo $user['Group']['name']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['fName']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['lName']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['username']; ?>&nbsp;</td>

@@ -9,7 +9,7 @@ class GroupsController extends AppController {
 	} 
 	
 	function index() {
-		$this->Group->recursive = 0;
+		$this->Group->recursive = 1;
 		$this->set('groups', $this->paginate());
 	}
 

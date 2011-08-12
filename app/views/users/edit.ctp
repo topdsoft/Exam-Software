@@ -7,7 +7,7 @@
 //		echo $this->Form->input('role');
 		echo $this->Form->input('fName');
 		echo $this->Form->input('lName');
-		echo $this->Form->input('group_id');
+//		echo $this->Form->input('group_id');
 		echo $this->Form->input('username');
 		echo $this->Form->input('password');
 	?>

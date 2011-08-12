@@ -4,6 +4,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
+			<th><?php echo $this->Paginator->sort('students');?></th>
 			<th><?php echo $this->Paginator->sort('notes');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
@@ -18,6 +19,7 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $group['Group']['id']; ?>&nbsp;</td>
 		<td><?php echo $group['Group']['name']; ?>&nbsp;</td>
+		<td><?php echo count($group['User']); ?>&nbsp;</td>
 		<td><?php echo $group['Group']['notes']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $group['Group']['id'])); ?>
@@ -25,7 +27,7 @@
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $group['Group']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $group['Group']['id'])); ?>
 		</td>
 	</tr>
-<?php endforeach; ?>
+<?php endforeach;?>
 	</table>
 	<p>
 	<?php

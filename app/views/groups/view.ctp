@@ -30,17 +30,14 @@
 	</ul>
 </div>
 <div class="related">
-	<h3><?php __('Related Users');?></h3>
+	<h3><?php __('Students in Group');?></h3>
 	<?php if (!empty($group['User'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
-		<th><?php __('Role'); ?></th>
-		<th><?php __('Group Id'); ?></th>
 		<th><?php __('FName'); ?></th>
 		<th><?php __('LName'); ?></th>
 		<th><?php __('Username'); ?></th>
-		<th><?php __('Password'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -53,16 +50,13 @@
 		?>
 		<tr<?php echo $class;?>>
 			<td><?php echo $user['id'];?></td>
-			<td><?php echo $user['role'];?></td>
-			<td><?php echo $user['group_id'];?></td>
 			<td><?php echo $user['fName'];?></td>
 			<td><?php echo $user['lName'];?></td>
 			<td><?php echo $user['username'];?></td>
-			<td><?php echo $user['password'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'users', 'action' => 'edit', $user['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'users', 'action' => 'delete', $user['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['id'])); ?>
+				<?php //echo $this->Html->link(__('Delete', true), array('controller' => 'users', 'action' => 'delete', $user['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

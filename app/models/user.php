@@ -1,7 +1,10 @@
 <?php
 class User extends AppModel {
 	var $name = 'User';
-	var $displayField = 'username';
+	var $virtualFields = array (
+		'fullname' => 'CONCAT (lName, ", ", fName)',
+		);
+	var $displayField = 'fullname';
 	var $validate = array(
 		'role' => array(
 			'numeric' => array(
@@ -72,10 +75,12 @@ class User extends AppModel {
 		)
 	);
 
-	var $belongsTo = array(
+	var $hasAndBelongsToMany = array(
 		'Group' => array(
 			'className' => 'Group',
-			'foreignKey' => 'group_id',
+			'joinTable' => 'groups_users',
+//			'foreignKey' => 'group_id',
+//			'associationForeignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

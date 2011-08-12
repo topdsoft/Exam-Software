@@ -4,6 +4,7 @@
 		<legend><?php __('Add Attempt'); ?></legend>
 	<?php
 		echo $this->Form->input('user_id');
+		echo $this->Form->input('group_id');
 		echo $this->Form->input('exam_id');
 //		echo $this->Form->input('date');
 //		echo $this->Form->input('score');

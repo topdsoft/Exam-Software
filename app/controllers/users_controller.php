@@ -40,9 +40,9 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
 			}
 		}
-		$groups=$this->User->Group->find('list');
-		array_unshift($groups,NULL);
-		$this->set(compact('groups'));
+//		$groups=$this->User->Group->find('list');
+//		array_unshift($groups,NULL);
+//		$this->set(compact('groups'));
 	}
 
 	function edit($id = null) {
@@ -65,9 +65,9 @@ class UsersController extends AppController {
 			$this->data = $this->User->read(null, $id);
 			$this->data['User']['password']=NULL;
 		}
-		$groups=$this->User->Group->find('list');
-		array_unshift($groups,NULL);
-		$this->set(compact('groups'));
+//		$groups=$this->User->Group->find('list');
+//		array_unshift($groups,NULL);
+//		$this->set(compact('groups'));
 	}
 
 	function delete($id = null) {

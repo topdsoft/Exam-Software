@@ -16,10 +16,12 @@ class Group extends AppModel {
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasMany = array(
+	var $hasAndBelongsToMany = array(
 		'User' => array(
 			'className' => 'User',
-			'foreignKey' => 'group_id',
+			'joinTable' => 'groups_users',
+//			'foreignKey' => 'group_id',
+//			'associationForeignKey' => 'user_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
