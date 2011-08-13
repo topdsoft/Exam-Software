@@ -24,6 +24,7 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $group['Group']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $group['Group']['id'])); ?>
+			<?php echo $this->Html->link(__('Members', true), array('action' => 'members', $group['Group']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $group['Group']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $group['Group']['id'])); ?>
 		</td>
 	</tr>

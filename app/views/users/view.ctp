@@ -45,11 +45,10 @@
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
-		<th><?php __('User Id'); ?></th>
 		<th><?php __('Test Id'); ?></th>
-		<th><?php __('Date'); ?></th>
+		<th><?php __('Date Taken'); ?></th>
 		<th><?php __('Score'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
+		<th class="actions"></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -61,14 +60,13 @@
 		?>
 		<tr<?php echo $class;?>>
 			<td><?php echo $attempt['id'];?></td>
-			<td><?php echo $attempt['user_id'];?></td>
-			<td><?php echo $attempt['test_id'];?></td>
+			<td><?php echo $attempt['exam_id'];?></td>
 			<td><?php echo $attempt['date'];?></td>
 			<td><?php echo $attempt['score'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'attempts', 'action' => 'view', $attempt['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'attempts', 'action' => 'edit', $attempt['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'attempts', 'action' => 'delete', $attempt['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $attempt['id'])); ?>
+				<?php //echo $this->Html->link(__('Edit', true), array('controller' => 'attempts', 'action' => 'edit', $attempt['id'])); ?>
+				<?php //echo $this->Html->link(__('Delete', true), array('controller' => 'attempts', 'action' => 'delete', $attempt['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $attempt['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
