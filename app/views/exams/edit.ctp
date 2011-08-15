@@ -17,7 +17,7 @@
 		//loop for all questions
 		$i++;
 		echo "<fieldset><legend>Question $i</legend>";
-		echo $Q['text'].'<br>';
+		echo $Q['text'].'(<i>'.$Q['value'].' points</i>)<br>';
 		if($Q['type']==0) echo '(essay)<br>';
 		else {
 			//show multiple choice

@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('text');
+		echo $this->Form->input('value');
 		echo $this->Form->input('exam_id',array('type'=>'hidden'));
 		echo $this->Form->input('type',array('type'=>'hidden'));
 		if ($this->data['Question']['type']==1) {

@@ -27,7 +27,9 @@ CREATE TABLE `answers` (
   `attempt_id` int(10) unsigned NOT NULL,
   `question_id` int(10) unsigned NOT NULL,
   `choice_id` int(10) unsigned DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
   `text` text,
+  `comments` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `attempt_id` (`attempt_id`),
   KEY `question_id` (`question_id`)
@@ -162,7 +164,7 @@ CREATE TABLE `groups_users` (
   `user_id` int(10) unsigned NOT NULL,
   `group_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +173,7 @@ CREATE TABLE `groups_users` (
 
 LOCK TABLES `groups_users` WRITE;
 /*!40000 ALTER TABLE `groups_users` DISABLE KEYS */;
-INSERT INTO `groups_users` VALUES (1,3,1),(2,4,1);
+INSERT INTO `groups_users` VALUES (1,3,1),(2,4,1),(3,5,1);
 /*!40000 ALTER TABLE `groups_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,6 +216,7 @@ CREATE TABLE `questions` (
   `exam_id` int(10) unsigned NOT NULL,
   `type` tinyint(1) NOT NULL,
   `answer` smallint(6) DEFAULT NULL,
+  `value` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `test_id` (`exam_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
@@ -225,7 +228,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,-3,'What is the instructor\'s name?',1,0,NULL),(2,0,'What university did the instructor attend?',1,1,7),(5,-2,'Third Question',1,0,NULL),(6,-1,'What is the instructor\'s favorite operating system?',1,1,11),(7,-4,'test question',1,1,15),(8,0,'Is smoking Crack Bad?',2,1,17),(9,0,'Why is smoking crack bad?',2,0,NULL);
+INSERT INTO `questions` VALUES (1,-3,'What is the instructor\'s name?',1,0,NULL,5),(2,0,'What university did the instructor attend?',1,1,7,5),(5,-2,'Third Question',1,0,NULL,0),(6,-1,'What is the instructor\'s favorite operating system?',1,1,11,5),(7,-4,'test question',1,1,15,0),(8,0,'Is smoking Crack Bad?',2,1,17,0),(9,0,'Why is smoking crack bad?',2,0,NULL,0);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-08-12 14:51:39
+-- Dump completed on 2011-08-15 10:49:00

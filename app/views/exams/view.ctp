@@ -82,7 +82,7 @@
 		<th><?php __('Text'); ?></th>
 		<th><?php //__('Exam Id'); ?></th>
 		<th><?php __('Type'); ?></th>
-		<th><?php //__('Answer'); ?></th>
+		<th><?php __('Value'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -102,7 +102,7 @@
 				if ($question['type']) echo 'MC';
 				else echo 'Essay';
 			?></td>
-			<td><?php //echo $question['answer'];?></td>
+			<td><?php echo $question['value'];?></td>
 			<td class="actions">
 				<?php if ($i>1) echo $this->Html->link(__('Move Up', true), array('controller' => 'questions', 'action' => 'moveUp', $question['id'])); ?>
 				<?php if ($i<count($questions)) echo $this->Html->link(__('Move Down', true), array('controller' => 'questions', 'action' => 'moveDown', $question['id'])); ?>

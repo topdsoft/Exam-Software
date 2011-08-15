@@ -6,6 +6,7 @@
 		echo $this->Form->input('text');
 		echo $this->Form->input('exam_id',array('type'=>'hidden','value'=>$exam_id));
 		echo $this->Form->input('type',array('label'=>'Multiple Choice'));
+		echo $this->Form->input('value');
 		//echo $this->Form->input('answer');
 	?>
 	</fieldset>
