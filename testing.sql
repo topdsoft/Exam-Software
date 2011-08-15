@@ -56,8 +56,9 @@ CREATE TABLE `attempts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `exam_id` int(10) unsigned NOT NULL,
-  `date` datetime NOT NULL,
+  `date` datetime DEFAULT NULL,
   `score` int(11) NOT NULL,
+  `graded` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `test_id` (`exam_id`)
@@ -70,7 +71,7 @@ CREATE TABLE `attempts` (
 
 LOCK TABLES `attempts` WRITE;
 /*!40000 ALTER TABLE `attempts` DISABLE KEYS */;
-INSERT INTO `attempts` VALUES (1,4,1,'0000-00-00 00:00:00',0),(2,5,1,'0000-00-00 00:00:00',0),(5,3,2,'0000-00-00 00:00:00',0),(6,4,2,'0000-00-00 00:00:00',0);
+INSERT INTO `attempts` VALUES (1,4,1,'0000-00-00 00:00:00',0,NULL),(2,5,1,'0000-00-00 00:00:00',0,NULL),(5,3,2,'0000-00-00 00:00:00',0,NULL),(6,4,2,'0000-00-00 00:00:00',0,NULL);
 /*!40000 ALTER TABLE `attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-08-15 10:49:00
+-- Dump completed on 2011-08-15 13:27:01

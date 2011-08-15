@@ -2,6 +2,9 @@
 class Exam extends AppModel {
 	var $name = 'Exam';
 	var $displayField = 'name';
+	var $virtualFields = array(
+		'points' => 'select sum(value) from questions where questions.exam_id=Exam.id'
+	);
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(

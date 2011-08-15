@@ -5,6 +5,7 @@
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
 			<th><?php echo $this->Paginator->sort('notes');?></th>
+			<th><?php echo $this->Paginator->sort('points');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -19,6 +20,7 @@
 		<td><?php echo $exam['Exam']['id']; ?>&nbsp;</td>
 		<td><?php echo $exam['Exam']['name']; ?>&nbsp;</td>
 		<td><?php echo $exam['Exam']['notes']; ?>&nbsp;</td>
+		<td><?php echo $exam['Exam']['points']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $exam['Exam']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $exam['Exam']['id'])); ?>
