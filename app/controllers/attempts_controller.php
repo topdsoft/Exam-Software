@@ -41,13 +41,14 @@ class AttemptsController extends AppController {
 		foreach($q as $q2) $questionsFinished[]=$q2['answers']['question_id'];
 //debug($q);exit;
 		//get exam id
-		$exam_id=$this->Attempt->field('exam_id');
+		$exam_id=$this->Attempt->field('exam_id',array('Attempt.id='.$id));
 		//get next question
 		$question=CLassRegistry::init('question')->find('first',array('conditions'=>array('exam_id='.$exam_id, 'NOT'=> array('Question.id'=>$questionsFinished)),'order'=>'ord'));
 		if(empty($question)) {
 			//no more questions
 			$this->Session->setFlash(__('Test Complete', true));
 			//set date of test taken
+			$this->Attempt->set('id',$id);
 			$this->Attempt->set('date',date('Y-m-d H:i:s'));
 			$this->Attempt->save();
 			$this->redirect(array('action' => 'studentindex'));
@@ -60,12 +61,55 @@ class AttemptsController extends AppController {
 	}
 
 	function view($id = null) {
-		if ($this->Auth->user('role')!=2) $this->redirect(array('action' => 'studentindex'));
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid attempt', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		//get list of correct answers for multiple chouce questions
+		$q=$this->Attempt->query("select questions.id,choices.text from choices,questions,attempts where 
+			choices.id=questions.answer and questions.exam_id=attempts.exam_id and attempts.id=$id");
+		$answers=array();
+		foreach($q as $e) $answers[$e['questions']['id']]=$e['choices']['text'];
+		$this->set('answers',$answers);
+//debug($answers);exit;
+		$this->Attempt->recursive=2;
 		$this->set('attempt', $this->Attempt->read(null, $id));
+		$this->set('role',$this->Auth->user('role'));
+	}
+
+	function grade($id=null) {
+		//grade an attempt
+		if ($this->Auth->user('role')!=2) $this->redirect(array('action' => 'studentindex'));
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Invalid attempt', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		if (!empty($this->data)) {
+			//returning
+			foreach($this->data['answer'] as $answer_id=>$answer) {
+				//loop for all returning answers
+				$this->Attempt->query("update answers set score={$answer['score']}, comments='{$answer['comments']}' where answers.id=$answer_id limit 1");
+//				echo $answer_id;debug($answer);
+			}//end foreach
+			//set attempt graded date
+			$this->Attempt->query("update attempts set graded=now() where attempts.id={$this->data['Attempt']['id']} limit 1");
+			$this->Session->setFlash(__('Attempt Graded ', true));
+			$this->redirect(array('action' => 'index'));
+//debug($this->data);exit;
+		}//endif
+		$this->Attempt->recursive=2;
+		$attempt=$this->Attempt->read(null,$id);
+		foreach($attempt['Answer'] as $answer) {
+			//loop for all answers
+			if($answer['Question']['type']) {
+				//score multiple choice answer
+				if ($answer['choice_id']==$answer['Question']['answer']) $answer['score']=$answer['Question']['value'];
+				else $answer['score']=0;
+				//save score
+				$this->Attempt->query("update answers set score={$answer['score']} where id={$answer['id']} limit 1");
+			}//endif
+		}//end foreach
+		$this->set('attempt',$attempt);
 	}
 
 	function add() {

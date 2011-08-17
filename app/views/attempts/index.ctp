@@ -5,9 +5,10 @@
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('user_id');?></th>
 			<th><?php echo $this->Paginator->sort('exam_id');?></th>
-			<th><?php echo $this->Paginator->sort('date');?></th>
+			<th><?php echo $this->Paginator->sort('Date Taken','date');?></th>
+			<th><?php echo $this->Paginator->sort('Date Graded','graded');?></th>
 			<th><?php echo $this->Paginator->sort('score');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th class="actions"><?php //__('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -26,11 +27,12 @@
 			<?php echo $this->Html->link($attempt['Exam']['name'], array('controller' => 'exams', 'action' => 'view', $attempt['Exam']['id'])); ?>
 		</td>
 		<td><?php echo $attempt['Attempt']['date']; ?>&nbsp;</td>
+		<td><?php echo $attempt['Attempt']['graded']; ?>&nbsp;</td>
 		<td><?php echo $attempt['Attempt']['score']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $attempt['Attempt']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $attempt['Attempt']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $attempt['Attempt']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $attempt['Attempt']['id'])); ?>
+			<?php if($attempt['Attempt']['date'])echo $this->Html->link(__('View', true), array('action' => 'view', $attempt['Attempt']['id'])); ?>
+			<?php if($attempt['Attempt']['date'] && !$attempt['Attempt']['graded'])echo $this->Html->link(__('Grade', true), array('action' => 'grade', $attempt['Attempt']['id'])); ?>
+			<?php //echo $this->Html->link(__('Delete', true), array('action' => 'delete', $attempt['Attempt']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $attempt['Attempt']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -57,7 +59,7 @@
 		<li><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Exams', true), array('controller' => 'exams', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Exam', true), array('controller' => 'exams', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Answers', true), array('controller' => 'answers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Answer', true), array('controller' => 'answers', 'action' => 'add')); ?> </li>
+		<li><?php //echo $this->Html->link(__('List Answers', true), array('controller' => 'answers', 'action' => 'index')); ?> </li>
+		<li><?php //echo $this->Html->link(__('New Answer', true), array('controller' => 'answers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

@@ -66,10 +66,10 @@
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
 		}
-		if ($attempt['Attempt']['date']):
+		if ($attempt['Attempt']['date'] && $attempt['Attempt']['graded']):
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $attempt['Attempt']['id']; ?>&nbsp;</td>
+		<td><?php //echo $attempt['Attempt']['id']; ?>&nbsp;</td>
 		<td>
 			<?php //echo $this->Html->link($attempt['User']['username'], array('controller' => 'users', 'action' => 'view', $attempt['User']['id'])); ?>
 		</td>

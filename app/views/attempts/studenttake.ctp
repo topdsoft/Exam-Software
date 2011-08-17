@@ -15,7 +15,7 @@
 				echo $this->Form->input('choice_id',array('type'=>'radio','options'=>$choices));
 			} else {
 				//essay
-				echo $this->Form->input('text');
+				echo $this->Form->input('text',array('type'=>'textarea'));
 			}//endif
 			echo $this->Form->input('attempt_id',array('type'=>'hidden','value'=>$attempt['Attempt']['id']));
 //			echo $this->Form->input('type',array('type'=>'hidden','value'=>$question['Question']['type']));

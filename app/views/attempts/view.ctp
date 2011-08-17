@@ -8,22 +8,28 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($attempt['User']['username'], array('controller' => 'users', 'action' => 'view', $attempt['User']['id'])); ?>
+			<?php 
+			if ($role>1) echo $this->Html->link($attempt['User']['username'], array('controller' => 'users', 'action' => 'view', $attempt['User']['id'])); 
+			else echo $attempt['User']['username'];
+			?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Exam'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($attempt['Exam']['name'], array('controller' => 'exams', 'action' => 'view', $attempt['Exam']['id'])); ?>
+			<?php 
+			if ($role>1) echo $this->Html->link($attempt['Exam']['name'], array('controller' => 'exams', 'action' => 'view', $attempt['Exam']['id'])); 
+			else echo $attempt['Exam']['name'];
+			?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Date'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Date Taken'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $attempt['Attempt']['date']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Score'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $attempt['Attempt']['score']; ?>
+			<?php echo $attempt['Attempt']['score'].'/'.$attempt['Attempt']['maxscore']; ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -31,16 +37,12 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Attempt', true), array('action' => 'edit', $attempt['Attempt']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Attempt', true), array('action' => 'delete', $attempt['Attempt']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $attempt['Attempt']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Attempts', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Attempt', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Exams', true), array('controller' => 'exams', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Exam', true), array('controller' => 'exams', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Answers', true), array('controller' => 'answers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Answer', true), array('controller' => 'answers', 'action' => 'add')); ?> </li>
+		<li><?php if($role>1)echo $this->Html->link(__('New Attempt', true), array('action' => 'add')); ?> </li>
+		<li><?php if($role>1)echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php if($role>1)echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php if($role>1)echo $this->Html->link(__('List Exams', true), array('controller' => 'exams', 'action' => 'index')); ?> </li>
+		<li><?php if($role>1)echo $this->Html->link(__('New Exam', true), array('controller' => 'exams', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <div class="related">
@@ -48,15 +50,14 @@
 	<?php if (!empty($attempt['Answer'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Attempt Id'); ?></th>
-		<th><?php __('Question Id'); ?></th>
-		<th><?php __('Choice Id'); ?></th>
-		<th><?php __('Text'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
+		<th><?//php __('Id'); ?></th>
+		<th><?php __('Question'); ?></th>
+		<th><?php __('Score'); ?></th>
+		<th><?php __('Your Answer'); ?></th>
+		<th><?php __('Correct Answer/Comment'); ?></th>
 	</tr>
 	<?php
-		$i = 0;
+		$i = 0;//debug($attempt);
 		foreach ($attempt['Answer'] as $answer):
 			$class = null;
 			if ($i++ % 2 == 0) {
@@ -64,24 +65,21 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td><?php echo $answer['id'];?></td>
-			<td><?php echo $answer['attempt_id'];?></td>
-			<td><?php echo $answer['question_id'];?></td>
-			<td><?php echo $answer['choice_id'];?></td>
-			<td><?php echo $answer['text'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'answers', 'action' => 'view', $answer['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'answers', 'action' => 'edit', $answer['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'answers', 'action' => 'delete', $answer['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $answer['id'])); ?>
-			</td>
+			<td><?//php echo $answer['id'];?></td>
+			<td><?php echo $answer['Question']['text'];?></td>
+			<td><?php echo $answer['score'].'/'.$answer['Question']['value'];?></td>
+			<td><?php 
+				if($answer['Question']['type']) echo $answer['Choice']['text'];
+				else echo nl2br($answer['text']);
+			?></td>
+			<td><?php 
+				if ($answer['score']==0) echo'<strong>';
+				if($answer['Question']['type']) echo $answers[$answer['Question']['id']];
+				else echo nl2br($answer['comments']);
+			?></td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Answer', true), array('controller' => 'answers', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
 </div>
