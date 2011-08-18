@@ -13,7 +13,8 @@ class UsersController extends AppController {
 
 	function index() {
 		if ($this->Auth->user('role')==1) $this->redirect(array('controller' => 'attempts','action' => 'index'));
-		$this->User->recursive = 0;
+		$this->User->recursive = 1;
+		$this->User->order='role desc,lName';
 		$this->set('users', $this->paginate());
 	}
 

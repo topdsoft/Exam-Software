@@ -19,7 +19,10 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $group['Group']['id']; ?>&nbsp;</td>
 		<td><?php echo $group['Group']['name']; ?>&nbsp;</td>
-		<td><?php echo count($group['User']); ?>&nbsp;</td>
+		<td><?php 
+			if($showUsers) foreach($group['User'] as $user) echo $user['fullname'].'<br>';
+			else echo count($group['User']); 
+		?>&nbsp;</td>
 		<td><?php echo $group['Group']['notes']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $group['Group']['id'])); ?>
@@ -43,6 +46,10 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
+	<?php
+		if($showUsers) echo $this->Html->link(__('Hide Group Members', true), array('action' => 'index'));
+		else echo $this->Html->link(__('Show Group Members', true), array('action' => 'index',true));
+	?>
 </div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>

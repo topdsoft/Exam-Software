@@ -8,9 +8,10 @@ class GroupsController extends AppController {
 		if ($this->Auth->user('role')==1) $this->redirect(array('controller' => 'attempts','action' => 'index'));
 	} 
 	
-	function index() {
+	function index($showUsers=false) {
 		$this->Group->recursive = 1;
 		$this->set('groups', $this->paginate());
+		$this->set('showUsers',$showUsers);
 	}
 
 	function view($id = null) {
@@ -48,7 +49,7 @@ class GroupsController extends AppController {
 		$q=$this->Group->query("select user_id from groups_users where group_id=$id");
 		$exclude=array();
 		foreach($q as $q2) $exclude[]=$q2['groups_users']['user_id'];//debug($exclude); exit;
-		$users=$this->Group->User->find('list',array('order'=>'lName','conditions'=>array('User.role=1','User.id not' => $exclude)));
+		$users=$this->Group->User->find('list',array('order'=>'lName','conditions'=>array('User.role=1','NOT'=>array('User.id' => $exclude))));
 		$this->set(compact('users'));
 	}
 

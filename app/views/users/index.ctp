@@ -7,7 +7,8 @@
 			<th><?php echo $this->Paginator->sort('fName');?></th>
 			<th><?php echo $this->Paginator->sort('lName');?></th>
 			<th><?php echo $this->Paginator->sort('username');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th><?php __('Groups');?></th>
+			<th><?php __('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -23,6 +24,9 @@
 		<td><?php echo $user['User']['fName']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['lName']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['username']; ?>&nbsp;</td>
+		<td><?php
+			foreach($user['Group'] as $group) echo $group['name'].'<br>';
+		?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $user['User']['id'])); ?>

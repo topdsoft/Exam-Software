@@ -65,6 +65,10 @@ class AttemptsController extends AppController {
 			$this->Session->setFlash(__('Invalid attempt', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		if ($this->Auth->user('role')==1) {
+			//validate this test was taken by current student
+			if($this->Attempt->field('user_id')!=$this->Auth->user('id')) $this->redirect(array('action' => 'studentindex'));
+		}//endif
 		//get list of correct answers for multiple chouce questions
 		$q=$this->Attempt->query("select questions.id,choices.text from choices,questions,attempts where 
 			choices.id=questions.answer and questions.exam_id=attempts.exam_id and attempts.id=$id");
